@@ -1,0 +1,11 @@
+POST http://localhost:8080/publisher?name=WKiŁ
+###
+
+GET http://localhost:8080/publisher/1
+###
+
+PUT http://localhost:8080/publisher/1?name=Helion
+###
+
+DELETE http://localhost:8080/publisher/1
+###

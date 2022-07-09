@@ -1,0 +1,11 @@
+POST http://localhost:8080/author?firstName=Jan&lastName=Kowalski
+###
+
+GET http://localhost:8080/author/1
+###
+
+PUT http://localhost:8080/author/1?firstName=zażółć gęślą jaźń&lastName=Nowak
+###
+
+DELETE http://localhost:8080/author/1
+###
