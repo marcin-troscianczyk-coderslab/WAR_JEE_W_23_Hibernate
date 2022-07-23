@@ -4,6 +4,9 @@ POST http://localhost:8080/publisher?name=WKiŁ
 GET http://localhost:8080/publisher/1
 ###
 
+GET http://localhost:8080/publishers
+###
+
 PUT http://localhost:8080/publisher/1?name=Helion
 ###
 

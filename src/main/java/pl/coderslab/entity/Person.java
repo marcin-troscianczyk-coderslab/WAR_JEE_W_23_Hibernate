@@ -16,11 +16,15 @@ public class Person {
 
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private PersonDetails personDetails;
 
     public Long getId() {
         return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -45,6 +49,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public PersonDetails getPersonDetails() {
+        return personDetails;
+    }
+
+    public void setPersonDetails(PersonDetails personDetails) {
+        this.personDetails = personDetails;
     }
 
     @Override

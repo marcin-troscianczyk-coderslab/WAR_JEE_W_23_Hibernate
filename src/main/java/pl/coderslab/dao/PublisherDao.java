@@ -5,6 +5,8 @@ import pl.coderslab.entity.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 public class PublisherDao {
@@ -18,6 +20,13 @@ public class PublisherDao {
 
     public Publisher findById(Long id) {
         return entityManager.find(Publisher.class, id);
+    }
+
+    public List<Publisher> findAll() {
+
+        Query query = entityManager.createQuery("SELECT p FROM Publisher p");
+
+        return query.getResultList();
     }
 
     public void update(Publisher publisher) {

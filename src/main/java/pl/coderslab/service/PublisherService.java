@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Publisher;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class PublisherService {
@@ -21,6 +23,10 @@ public class PublisherService {
 
     public Publisher findById(Long id) {
         return publisherDao.findById(id);
+    }
+
+    public List<Publisher> findAll() {
+        return publisherDao.findAll();
     }
 
     public void update(Publisher publisher) {

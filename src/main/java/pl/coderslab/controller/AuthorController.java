@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Author;
 import pl.coderslab.service.AuthorService;
 
+import java.util.List;
+
 @RestController
 class AuthorController {
 
@@ -30,6 +32,14 @@ class AuthorController {
         Author author = authorService.findById(id);
 
         return author != null ? author.toString() : "Nie znaleziono autora o podanym id " + id;
+    }
+
+    @GetMapping(path = "/authors")
+    String findAll() {
+
+        List<Author> authors = authorService.findAll();
+
+        return authors.toString();
     }
 
     @PutMapping(path = "/author/{id}")

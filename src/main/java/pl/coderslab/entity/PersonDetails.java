@@ -17,7 +17,6 @@ public class PersonDetails {
 
     private String street;
 
-    @Column(length = 100)
     private String city;
 
     @OneToOne

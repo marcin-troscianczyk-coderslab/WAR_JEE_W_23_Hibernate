@@ -1,11 +1,17 @@
-POST http://localhost:8080/book?title=ala ma kota&rating=5&description=Ciekawa książka
+POST http://localhost:8080/book?title=ala ma kota&rating=1&description=Ciekawa książka
 ###
 
 GET http://localhost:8080/book/1
+###
+
+GET http://localhost:8080/books
 ###
 
 PUT http://localhost:8080/book/1?title=ala ma kota Filemona z czarną łapką&rating=8&description=Ciekawa książka o kocie Filemonie
 ###
 
 DELETE http://localhost:8080/book/1
+###
+
+GET http://localhost:8080/books?rating=3
 ###

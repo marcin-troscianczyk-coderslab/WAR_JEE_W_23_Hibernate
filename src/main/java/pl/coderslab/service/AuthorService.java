@@ -5,6 +5,7 @@ import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,6 +23,10 @@ public class AuthorService {
 
     public Author findById(Long authorId) {
         return authorDao.findById(authorId);
+    }
+
+    public List<Author> findAll() {
+        return authorDao.findAll();
     }
 
     public void update(Author author) {

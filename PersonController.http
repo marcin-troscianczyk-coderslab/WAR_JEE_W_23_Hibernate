@@ -1,0 +1,11 @@
+POST http://localhost:8080/person?login=janek&password=janek123&email=jan.kowalski@poczta.pl
+###
+
+GET http://localhost:8080/person/1
+###
+
+PUT http://localhost:8080/person/1?login=jan&password=jan123&email=jan.kowalski@inna-poczta.pl
+###
+
+DELETE http://localhost:8080/person/1
+###

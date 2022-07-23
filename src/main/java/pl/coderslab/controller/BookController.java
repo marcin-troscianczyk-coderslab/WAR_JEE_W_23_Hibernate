@@ -53,6 +53,22 @@ class BookController {
         return book != null ? book.toString() : "Nie znaleziono książki o podanym id " + id;
     }
 
+    @GetMapping(path = "/books")
+    String findAll() {
+
+        List<Book> books = bookService.findAll();
+
+        return books.toString();
+    }
+
+    @GetMapping(path = "/books", params = "rating")
+    String findAllByRating(@RequestParam int rating) {
+
+        List<Book> books = bookService.findAllByRating(rating);
+
+        return books.toString();
+    }
+
     @PutMapping(path = "/book/{id}")
     void update(@PathVariable Long id, @RequestParam String title, @RequestParam int rating, @RequestParam String description) {
 

@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Publisher;
 import pl.coderslab.service.PublisherService;
 
+import java.util.List;
+
 @RestController
 class PublisherController {
 
@@ -29,6 +31,14 @@ class PublisherController {
         Publisher publisher = publisherService.findById(id);
 
         return publisher != null ? publisher.toString() : "Nie znaleziono wydawcy o podanym id " + id;
+    }
+
+    @GetMapping(path = "/publishers")
+    String findAll() {
+
+        List<Publisher> publishers = publisherService.findAll();
+
+        return publishers.toString();
     }
 
     @PutMapping(path = "/publisher/{id}")

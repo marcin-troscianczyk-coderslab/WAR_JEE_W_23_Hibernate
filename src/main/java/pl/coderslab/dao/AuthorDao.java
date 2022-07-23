@@ -5,6 +5,8 @@ import pl.coderslab.entity.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 public class AuthorDao {
@@ -22,6 +24,13 @@ public class AuthorDao {
 
     public Author findById(Long id) {
         return entityManager.find(Author.class, id);
+    }
+
+    public List<Author> findAll() {
+
+        Query query = entityManager.createQuery("SELECT a FROM Author a");
+
+        return query.getResultList();
     }
 
     public void delete(long id) {
