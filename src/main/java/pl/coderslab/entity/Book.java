@@ -1,6 +1,12 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +18,30 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 5, message = "{book.title}")
+    @NotNull
     private String title;
 
+    @Range(min = 1, max = 10)
     private int rating;
 
+    @Size(max = 600, message = "{book.description}")
+    @NotNull
     private String description;
 
     @ManyToOne
+    @NotNull
     private Publisher publisher;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @NotEmpty
     private List<Author> authors = new ArrayList<>();
+
+    @Min(1)
+    private int pages;
+
+    @ManyToOne
+    private Category category;
 
     public Long getId() {
         return id;
@@ -70,6 +89,22 @@ public class Book {
 
     public void setAuthors(List<Author> authors) {
         this.authors = authors;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

@@ -1,44 +1,44 @@
 package pl.coderslab.service;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.dao.BookDao;
 import pl.coderslab.entity.Book;
+import pl.coderslab.repository.BookRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class BookService {
 
-    private final BookDao bookDao;
+    private final BookRepository bookRepository;
 
-    public BookService(BookDao bookDao) {
-        this.bookDao = bookDao;
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     public void save(Book book) {
-        bookDao.save(book);
+        bookRepository.save(book);
     }
 
-    public Book findById(Long id) {
-        return bookDao.findById(id);
+    public Optional<Book> findById(Long id) {
+        return bookRepository.findById(id);
     }
 
     public List<Book> findAll() {
-        return bookDao.findAll();
+        return bookRepository.findAll();
     }
 
     public void update(Book book) {
-        bookDao.update(book);
+        bookRepository.save(book);
     }
 
     public void deleteById(Long id) {
-        bookDao.deleteById(id);
+        bookRepository.deleteById(id);
     }
 
-    public List<Book> findAllByRating(int rating) {
-        return bookDao.findAllByRating(rating);
-    }
+    /*public List<Book> findAllByRating(int rating) {
+        return bookRepository.findAllByRating(rating);
+    }*/
 }

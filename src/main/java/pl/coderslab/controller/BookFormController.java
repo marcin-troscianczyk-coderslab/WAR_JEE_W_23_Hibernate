@@ -2,6 +2,7 @@ package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,10 @@ import pl.coderslab.service.AuthorService;
 import pl.coderslab.service.BookService;
 import pl.coderslab.service.PublisherService;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 class BookFormController {
@@ -49,7 +52,11 @@ class BookFormController {
     }
 
     @PostMapping(path = "/book/add")
-    String processAddBookForm(Book book) {
+    String processAddBookForm(@Valid Book book, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "book/add";
+        }
 
         bookService.save(book);
 
@@ -67,7 +74,7 @@ class BookFormController {
 
     @GetMapping(path = "book/edit", produces = "text/html;charset=UTF-8")
     String showEditForm(@RequestParam("id") long bookId, Model model) {
-        Book book = bookService.findById(bookId);
+        Optional<Book> book = bookService.findById(bookId);
         model.addAttribute("book", book);
         return "book/edit";
     }

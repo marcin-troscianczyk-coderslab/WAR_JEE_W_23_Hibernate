@@ -19,11 +19,12 @@
 <h1>Add book</h1>
 <form:form method="post" modelAttribute="book">
     <div class="flex-container">
-        <span>Title:<form:input path="title"/></span>
-        <span>Rating: <form:input path="rating"/></span>
-        <span>Description: <form:input path="description"/></span>
-        <span>Publisher: <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id"/></span>
-        <span>Authors: <form:select path="authors" items="${authors}" itemLabel="name" itemValue="id"/></span>
+        <span>Title:<form:input path="title"/></span><form:errors path="title" cssClass="error"/>
+        <span>Rating: <form:input path="rating"/></span><form:errors path="rating" cssClass="error"/>
+        <span>Description: <form:input path="description"/></span><form:errors path="description" cssClass="error"/>
+        <span>Publisher: <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id"/></span><form:errors path="publisher" cssClass="error"/>
+        <span>Authors: <form:select path="authors" items="${authors}" itemLabel="name" itemValue="id"/></span><form:errors path="authors" cssClass="error"/>
+        <span>Pages:<form:input path="pages"/></span><form:errors path="pages" cssClass="error"/>
     </div>
     <input type="submit" value="Add book">
 </form:form>
