@@ -13,6 +13,7 @@
         <th>Rating</th>
         <th>Description</th>
         <th>Publisher</th>
+        <th>Category</th>
         <th>Authors</th>
     </tr>
     <c:forEach items="${books}" var="book">
@@ -22,6 +23,7 @@
             <td>${book.rating}</td>
             <td>${book.description}</td>
             <td>${book.publisher.name}</td>
+            <td>${book.category.name}</td>
             <td>
                 <c:forEach items="${book.authors}" var="author">
                     ${author.firstName} ${author.lastName}

@@ -41,6 +41,7 @@ public class Book {
     private int pages;
 
     @ManyToOne
+    @NotNull
     private Category category;
 
     public Long getId() {

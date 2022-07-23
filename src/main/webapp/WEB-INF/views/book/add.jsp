@@ -25,6 +25,7 @@
         <span>Publisher: <form:select path="publisher.id" items="${publishers}" itemLabel="name" itemValue="id"/></span><form:errors path="publisher" cssClass="error"/>
         <span>Authors: <form:select path="authors" items="${authors}" itemLabel="name" itemValue="id"/></span><form:errors path="authors" cssClass="error"/>
         <span>Pages:<form:input path="pages"/></span><form:errors path="pages" cssClass="error"/>
+        <span>Category:<form:select path="category.id" items="${categories}" itemLabel="name" itemValue="id"/></span><form:errors path="category" cssClass="error"/>
     </div>
     <input type="submit" value="Add book">
 </form:form>

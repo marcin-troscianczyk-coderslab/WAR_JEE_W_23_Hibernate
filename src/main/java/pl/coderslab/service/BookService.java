@@ -2,9 +2,11 @@ package pl.coderslab.service;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Book;
+import pl.coderslab.entity.Category;
 import pl.coderslab.repository.BookRepository;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +38,14 @@ public class BookService {
 
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    public Collection<Book> findByTitle(String title) {
+        return bookRepository.findByTitle(title);
+    }
+
+    public Collection<Book> findByCategory(Category category) {
+        return bookRepository.findByCategory(category);
     }
 
     /*public List<Book> findAllByRating(int rating) {

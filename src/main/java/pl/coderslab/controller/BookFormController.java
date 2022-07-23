@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
+import pl.coderslab.entity.Category;
 import pl.coderslab.entity.Publisher;
 import pl.coderslab.service.AuthorService;
 import pl.coderslab.service.BookService;
+import pl.coderslab.service.CategoryService;
 import pl.coderslab.service.PublisherService;
 
 import javax.validation.Valid;
@@ -25,11 +27,13 @@ class BookFormController {
     private final BookService bookService;
     private final PublisherService publisherService;
     private final AuthorService authorService;
+    private final CategoryService categoryService;
 
-    public BookFormController(BookService bookService, PublisherService publisherService, AuthorService authorService) {
+    public BookFormController(BookService bookService, PublisherService publisherService, AuthorService authorService, CategoryService categoryService) {
         this.bookService = bookService;
         this.publisherService = publisherService;
         this.authorService = authorService;
+        this.categoryService = categoryService;
     }
 
     @ModelAttribute("publishers")
@@ -40,6 +44,11 @@ class BookFormController {
     @ModelAttribute("authors")
     Collection<Author> findAllAuthors() {
         return authorService.findAll();
+    }
+
+    @ModelAttribute("categories")
+    Collection<Category> findAllCategories() {
+        return categoryService.findAll();
     }
 
     @GetMapping(path = "/book/add")
@@ -89,5 +98,30 @@ class BookFormController {
     String showRemovingConfirmation(Book book) {
         bookService.deleteById(book.getId());
         return "redirect:/book/list";
+    }
+
+    // Book's searcher
+
+    @GetMapping(path = "/book/search")
+    String showSearchForm() {
+        return "book/search";
+    }
+
+    @GetMapping(path = "/book/search", params = "title")
+    String searchBookByTitle(@RequestParam String title, Model model) {
+
+        Collection<Book> books = bookService.findByTitle(title);
+        model.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping(path = "/book/search", params = "id")
+    String searchBookByCategory(Category category, Model model) {
+
+        Collection<Book> books = bookService.findByCategory(category);
+        model.addAttribute("books", books);
+
+        return "book/list";
     }
 }
