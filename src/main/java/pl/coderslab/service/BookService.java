@@ -1,5 +1,7 @@
 package pl.coderslab.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Category;
@@ -44,8 +46,20 @@ public class BookService {
         return bookRepository.findByTitle(title);
     }
 
+    public List<Book> findAllByTitleUsingQuery(String title) {
+        return bookRepository.findAllByTitleUsingQuery(title);
+    }
+
     public Collection<Book> findByCategory(Category category) {
         return bookRepository.findByCategory(category);
+    }
+
+    public List<Book> findAllByCategoryUsingQuery(Category category) {
+        return bookRepository.findAllByCategoryUsingQuery(category);
+    }
+
+    public Page<Book> findFirstByCategoryOrderByTitleUsingQuery(Category category, Pageable pageable) {
+        return bookRepository.findFirstByCategoryOrderByTitleUsingQuery(category, pageable);
     }
 
     /*public List<Book> findAllByRating(int rating) {

@@ -1,5 +1,9 @@
 package pl.coderslab.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +24,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 class BookFormController {
@@ -110,7 +115,8 @@ class BookFormController {
     @GetMapping(path = "/book/search", params = "title")
     String searchBookByTitle(@RequestParam String title, Model model) {
 
-        Collection<Book> books = bookService.findByTitle(title);
+        //Collection<Book> books = bookService.findByTitle(title);
+        List<Book> books = bookService.findAllByTitleUsingQuery(title);
         model.addAttribute("books", books);
 
         return "book/list";
@@ -119,8 +125,11 @@ class BookFormController {
     @GetMapping(path = "/book/search", params = "id")
     String searchBookByCategory(Category category, Model model) {
 
-        Collection<Book> books = bookService.findByCategory(category);
-        model.addAttribute("books", books);
+        //Collection<Book> books = bookService.findByCategory(category);
+        //List<Book> books = bookService.findAllByCategoryUsingQuery(category);
+        Pageable pageable = PageRequest.of(0, 1, Sort.by("title").ascending());
+        Page<Book> page = bookService.findFirstByCategoryOrderByTitleUsingQuery(category, pageable);
+        model.addAttribute("books", page.get().collect(Collectors.toList()));
 
         return "book/list";
     }
